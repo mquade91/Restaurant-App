@@ -1,0 +1,97 @@
+<html>
+
+    <head lang="en-us">
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    </head>
+
+    <body>
+        <div id="contactboxstyle" class="bg-faded p-4 my-4">
+            <hr class="divider">
+            <h2 id="res" class="text-center text-lg text-uppercase my-0"><strong>Book</strong> A
+                <strong>Reservation</strong>
+            </h2>
+            <div class="text-center">
+                <button type="button" class="btn btn-primary" href="table.html">View Tables</button>
+                <button type="button" class="btn btn-secondary" href="Homepage.html">Home</button>
+            </div>
+            <hr class="divider">
+            <form id="bookRes">
+                <div class="row">
+                    <div class <div class="form-group col-lg-3">
+                        <label class="text-heading">First Name:</label>
+                        <input id="first_name" type="text" class="form-control">
+                    </div>
+                    <!--<div class="form-group col-lg-3">-->
+                    <!--    <label class="text-heading">Last Name:</label>-->
+                    <!--    <input id="ip1" type="text" class="form-control">-->
+                    <!--</div>-->
+                    <!--  <div class="form-group col-lg-3">
+                        <label class="text-heading">Number of Guests:</label>
+                        <input id="ip2" type="number" class="form-control">
+                    </div> -->
+                    <div class="form-group col-lg-3">
+                        <label class="text-heading">Unique ID:</label>
+                        <input id="unique_id" id="ID" type="text" class="form-control">
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label class="text-heading">Phone Number:</label>
+                        <input id="phone_number" type="tel" class="form-control">
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label class="text-heading">email:</label>
+                        <input id="email" type="text" class="form-control">
+                    </div>
+                    <!--<div class="clearfix"></div>-->
+                    <!--<div class="form-group col-lg-12">-->
+                    <!--    <label class="text-heading">Anything Special We Should Know? Birthday? Anniversary?</label>-->
+                    <!--    <textarea id="ip5" class="form-control"></textarea>-->
+                </div>
+                <div class="form-group col-lg-12">
+                    <input id="ip6" type="button" value="Submit" id="btnsubmit" onclick="submitForm()">
+                    <!--<button id="ip5" type="submit" onclick="submitForm" class="btn btn-secondary">Submit</button>-->
+                </div>
+        </div>
+        </form>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <p>
+                    <a href="/api/waitlist">API Wait List</a> |
+
+                    <a href="/api/tables">API Table Link </a>
+                </p>
+            </div>
+
+        </div>
+        </div>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('select').select();
+                $('#modal1').modal();
+                $("#send").click(function(event) {
+                    if ($("#first_name").val() && $("#phone_number").val() && $("#unique_id").val() && $("#email").val()) {
+                        var data = {};
+
+                        data.name = ($("#first_name").val());
+                        data.phone = ($("#phone_number").val());
+                        data.id = ($("#unique_id").val());
+                        data.email = ($("#email").val());
+
+                        console.log(data);
+                        $.post("/reservation", data, function(event) {
+                            alert("Ok");
+                        });
+                    }
+                    else {
+                        M.Modal.getInstance($("#modal1")).open();
+                    }
+                });
+            });
+        </script>
+    </body>
+
+</html>
