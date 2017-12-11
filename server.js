@@ -11,7 +11,7 @@ app.use("/?", htmlRoutes);
 app.use("/reservation", reservationRoutes);
 
 
-
-app.listen(process.env.PORT || 8080, function() {
-    console.log("Main:" + process.env.PORT)
+var PORT = process.env.PORT || 8080
+app.listen(PORT, function() {
+	console.log("Main:" + PORT)
 });
