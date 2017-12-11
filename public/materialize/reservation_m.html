@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Reservation page</title>
+		<!-- Compiled and minified CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.2/css/materialize.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col s12">
+					<h1>Reservation page</h1>
+					<div class="row">
+						<div class="input-field col s6">
+							<input id="first_name" type="text" class="validate">
+							<label for="first_name">First Name (Required)</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="phone_number" type="text" class="validate">
+							<label for="phone_number">Phone number</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<div class="input-field col s6">
+								<input id="email" type="text" class="validate">
+								<label for="email">Email (Required)</label>
+							</div>
+							<div class="input-field col s6">
+								<input id="unique_id" type="text" class="validate">
+								<label for="unique_id">Unique ID</label>
+							</div>
+						</div>
+					</div>
+					<button class="btn" id="send">Submit</button>
+
+				</div>
+			</div>
+		</div>
+		<!-- Compiled and minified JavaScript -->
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.2/js/materialize.min.js"></script>
+		<!-- Modal Structure -->
+		<div id="modal1" class="modal">
+			<div class="modal-content">
+				<p>Please fill in all fields</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+			</div>
+		</div>
+		<div id="modal2" class="modal">
+			<div class="modal-content">
+				<h4>Your match!</h4>
+				<img src="" id="img_match" class="materialboxed" width="650">
+				<h5 id="name_match"></h5>
+			</div>
+			<div class="modal-footer">
+				<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('select').select();
+				$('#modal1').modal();
+				$("#send").click(function(event) {
+					if ($("#first_name").val() && $("#phone_number").val() && $("#unique_id").val() && $("#email").val()) {
+						var data = {};
+
+						data.name = ($("#first_name").val());
+						data.phone = ($("#phone_number").val());
+						data.id = ($("#unique_id").val());
+						data.email = ($("#email").val());
+
+						console.log(data);
+						$.post("/reservation", data, function(event) {
+							alert(event);
+						});
+					}
+					else {
+						M.Modal.getInstance($("#modal1")).open();
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

@@ -3,7 +3,7 @@ module.exports = function() {
 	var apiRouter = new require("express").Router();
 
 	apiRouter.get("/?(index.html)?", function(request, response) {
-		fs.readFile("./public/home.html", "utf-8", function(error, result) {
+		fs.readFile("./public/Homepage.html", "utf-8", function(error, result) {
 			error && console.log(error);
 			console.log("home page requested");
 			response.end(result);

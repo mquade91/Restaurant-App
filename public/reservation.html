@@ -1,92 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
-	<head>
-		<meta charset="UTF-8">
-		<title>Reservation page</title>
-		<!-- Compiled and minified CSS -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.2/css/materialize.min.css">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	</head>
+    <head lang="en-us">
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
-	<body>
-		<div class="container">
-			<div class="row">
-				<div class="col s12">
-					<h1>Reservation page</h1>
-					<div class="row">
-						<div class="input-field col s6">
-							<input id="first_name" type="text" class="validate">
-							<label for="first_name">First Name (Required)</label>
-						</div>
-						<div class="input-field col s6">
-							<input id="phone_number" type="text" class="validate">
-							<label for="phone_number">Phone number</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s6">
-							<div class="input-field col s6">
-								<input id="email" type="text" class="validate">
-								<label for="email">Email (Required)</label>
-							</div>
-							<div class="input-field col s6">
-								<input id="unique_id" type="text" class="validate">
-								<label for="unique_id">Unique ID</label>
-							</div>
-						</div>
-					</div>
-					<button class="btn" id="send">Submit</button>
+    </head>
 
-				</div>
-			</div>
-		</div>
-		<!-- Compiled and minified JavaScript -->
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.2/js/materialize.min.js"></script>
-		<!-- Modal Structure -->
-		<div id="modal1" class="modal">
-			<div class="modal-content">
-				<p>Please fill in all fields</p>
-			</div>
-			<div class="modal-footer">
-				<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-			</div>
-		</div>
-		<div id="modal2" class="modal">
-			<div class="modal-content">
-				<h4>Your match!</h4>
-				<img src="" id="img_match" class="materialboxed" width="650">
-				<h5 id="name_match"></h5>
-			</div>
-			<div class="modal-footer">
-				<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-			</div>
-		</div>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$('select').select();
-				$('#modal1').modal();
-				$("#send").click(function(event) {
-					if ($("#first_name").val() && $("#phone_number").val() && $("#unique_id").val() && $("#email").val()) {
-						var data = {};
+    <body>
+        <div id="contactboxstyle" class="bg-faded p-4 my-4">
+            <hr class="divider">
+            <h2 id="res" class="text-center text-lg text-uppercase my-0"><strong>Book</strong> A
+                <strong>Reservation</strong>
+            </h2>
+            <div class="text-center">
+                <button type="button" class="btn btn-primary" href="table.html">View Tables</button>
+                <button type="button" class="btn btn-secondary" href="Homepage.html">Home</button>
+            </div>
+            <hr class="divider">
+            <form id="bookRes">
+                <div class="row">
+                    <div class <div class="form-group col-lg-3">
+                        <label class="text-heading">First Name:</label>
+                        <input id="first_name" type="text" class="form-control">
+                    </div>
+                    <!--<div class="form-group col-lg-3">-->
+                    <!--    <label class="text-heading">Last Name:</label>-->
+                    <!--    <input id="ip1" type="text" class="form-control">-->
+                    <!--</div>-->
+                    <!--  <div class="form-group col-lg-3">
+                        <label class="text-heading">Number of Guests:</label>
+                        <input id="ip2" type="number" class="form-control">
+                    </div> -->
+                    <div class="form-group col-lg-3">
+                        <label class="text-heading">Unique ID:</label>
+                        <input id="unique_id" id="ID" type="text" class="form-control">
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label class="text-heading">Phone Number:</label>
+                        <input id="phone_number" type="tel" class="form-control">
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label class="text-heading">email:</label>
+                        <input id="email" type="text" class="form-control">
+                    </div>
+                    <!--<div class="clearfix"></div>-->
+                    <!--<div class="form-group col-lg-12">-->
+                    <!--    <label class="text-heading">Anything Special We Should Know? Birthday? Anniversary?</label>-->
+                    <!--    <textarea id="ip5" class="form-control"></textarea>-->
+                </div>
+                <div class="form-group col-lg-12">
+                    <input id="submit" type="button" value="Submit" id="btnsubmit" onclick="submitForm()">
+                    <!--<button id="ip5" type="submit" onclick="submitForm" class="btn btn-secondary">Submit</button>-->
+                </div>
+        </div>
+        </form>
+        </div>
 
-						data.name = ($("#first_name").val());
-						data.phone = ($("#phone_number").val());
-						data.id = ($("#unique_id").val());
-						data.email = ($("#email").val());
+        <div class="row">
+            <div class="col-lg-12">
+                <p>
+                    <a href="/api/waitlist">API Wait List</a> |
 
-						console.log(data);
-						$.post("/reservation", data, function(event) {
-							alert(event);
-						});
-					}
-					else {
-						M.Modal.getInstance($("#modal1")).open();
-					}
-				});
-			});
-		</script>
-	</body>
+                    <a href="/api/tables">API Table Link </a>
+                </p>
+            </div>
+
+        </div>
+        </div>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                // $('select').select();
+                // $('#modal1').modal();
+                $("#submit").click(function(event) {
+                    if ($("#first_name").val() && $("#phone_number").val() && $("#unique_id").val() && $("#email").val()) {
+                        var data = {};
+
+                        data.name = ($("#first_name").val());
+                        data.phone = ($("#phone_number").val());
+                        data.id = ($("#unique_id").val());
+                        data.email = ($("#email").val());
+
+                        console.log(data);
+                        $.post("/reservation", data, function(event) {
+                            alert("Ok");
+                        });
+                    }
+                    else {
+                        M.Modal.getInstance($("#modal1")).open();
+                    }
+                });
+            });
+        </script>
+    </body>
 
 </html>
