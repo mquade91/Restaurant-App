@@ -6,7 +6,7 @@ var reservationRoutes = require("./routing/reservation.js")
 
 var path = require("path");
 
-app.use("/api/tables", apiRoutes);
+app.use("/api/", apiRoutes);
 app.use("/?", htmlRoutes);
 app.use("/reservation", reservationRoutes);
 
