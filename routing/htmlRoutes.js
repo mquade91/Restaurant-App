@@ -17,7 +17,7 @@ module.exports = function() {
 		});
 	});
 	apiRouter.get("/table(.html)?", function(request, response) {
-		fs.readFile("./public/table", "utf-8", function(error, result) {
+		fs.readFile("./public/table.html", "utf-8", function(error, result) {
 			error && console.log(error);
 			console.log("table page requested");
 			response.end(result);
